@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 
+import Item from './Item/Item';
+
 import Drawer from '@material-ui/core/Drawer';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
@@ -38,7 +40,17 @@ const App = () => {
   if (isLoading) return <LinearProgress />;
   if (error) return <div>Something went wrong . . .</div>;
 
-  return <div>App</div>;
+  return (
+    <Wrapper>
+      <Grid container spacing={3}>
+        {data?.map((item) => (
+          <Grid item key={item.id} xs={12} sm={4}>
+            <Item handleAddToCart={handleAddToCart} item={item} />
+          </Grid>
+        ))}
+      </Grid>
+    </Wrapper>
+  );
 };
 
 export default App;
