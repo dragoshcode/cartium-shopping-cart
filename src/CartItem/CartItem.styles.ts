@@ -7,6 +7,10 @@ export const Wrapper = styled.div`
   border-bottom: 1px solid lightblue;
   padding-bottom: 20px;
 
+  h3 {
+    margin-top: 1rem;
+  }
+
   div {
     flex: 1;
   }
@@ -15,11 +19,16 @@ export const Wrapper = styled.div`
   .buttons {
     display: flex;
     justify-content: space-between;
+    margin-top: 0.5rem;
+  }
+
+  p {
+    margin-top: 0.5rem;
   }
 
   img {
     max-width: 80px;
-    object-fit: cover;
+    object-fit: contain;
     margin-left: 40px;
   }
 `;

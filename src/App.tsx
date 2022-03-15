@@ -5,12 +5,13 @@ import Item from './Item/Item';
 import Cart from './Cart/Cart';
 
 import Drawer from '@material-ui/core/Drawer';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import Bag from '@material-ui/icons/LocalMall';
 import Badge from '@material-ui/core/Badge';
 
-import { Wrapper, StyledButton } from './App.styles';
+import { Wrapper, StyledButton, Header } from './App.styles';
 
 export type CartItemType = {
   id: number;
@@ -67,31 +68,54 @@ const App = () => {
     );
   };
 
-  if (isLoading) return <LinearProgress />;
+  if (isLoading)
+    return (
+      <CircularProgress
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          width: '5rem',
+          marginInline: 'auto',
+          minHeight: '100vh',
+          color: '#008db0'
+        }}
+      />
+    );
   if (error) return <div>Something went wrong . . .</div>;
 
   return (
-    <Wrapper>
-      <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
-        <Cart
-          cartItems={cartItems}
-          addToCart={handleAddToCart}
-          removeFromCart={handleRemoveFromCart}
-        />
-      </Drawer>
-      <StyledButton onClick={() => setCartOpen(true)}>
-        <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-          <AddShoppingCartIcon />
-        </Badge>
-      </StyledButton>
-      <Grid container spacing={3}>
-        {data?.map((item) => (
-          <Grid item key={item.id} xs={12} sm={4}>
-            <Item handleAddToCart={handleAddToCart} item={item} />
-          </Grid>
-        ))}
-      </Grid>
-    </Wrapper>
+    <>
+      <Header>
+        <h2>Cartium</h2>
+        <Bag />
+      </Header>
+      <Wrapper>
+        <Drawer
+          anchor='right'
+          open={cartOpen}
+          onClose={() => setCartOpen(false)}
+        >
+          <Cart
+            cartItems={cartItems}
+            addToCart={handleAddToCart}
+            removeFromCart={handleRemoveFromCart}
+          />
+        </Drawer>
+        <StyledButton onClick={() => setCartOpen(true)}>
+          <Badge badgeContent={getTotalItems(cartItems)} color='error'>
+            <AddShoppingCartIcon />
+          </Badge>
+        </StyledButton>
+        <h2 className='title'>Our Products</h2>
+        <Grid container spacing={3}>
+          {data?.map((item) => (
+            <Grid item key={item.id} xs={12} sm={4}>
+              <Item handleAddToCart={handleAddToCart} item={item} />
+            </Grid>
+          ))}
+        </Grid>
+      </Wrapper>
+    </>
   );
 };
 
