@@ -10,13 +10,6 @@ export const Wrapper = styled.div`
   height: 100%;
   margin-top: 4rem;
 
-   /* deploy*/ 
-  /* do 1 more project, time till thursday) */
-
-  /* take a MaterialUI tutorial */
-
-  /* then comes thursday where I'm prepared for the interview */
-
   h3,p {
     margin-top: 1rem;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
